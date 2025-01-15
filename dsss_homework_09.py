@@ -15,7 +15,7 @@ pipeline = transformers.pipeline(
 )
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """
-    Handle the /start command. Sends a welcome message to the user.
+    start command, to start the Bot
 
     Args:
         update (Update): Incoming update from Telegram.
@@ -26,15 +26,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """
-    Handle incoming text messages. Echoes the received message back to the user.
+    Handle incoming text messages, and returns the answer of the LLM
 
     Args:
         update (Update): Incoming update from Telegram.
         context (ContextTypes.DEFAULT_TYPE): Context object containing bot data.
     """
     input_message = update.message.text
-
-    #print("here")
 
     messages = [
         {"role": "user", "content": input_message}
@@ -46,7 +44,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
 async def send_message(context: ContextTypes.DEFAULT_TYPE, chat_id: int, text: str) -> None:
     """
-    Send a message to a specific chat.
+    Sends the message to telegram
 
     Args:
         context (ContextTypes.DEFAULT_TYPE): Context object containing bot data.
@@ -58,7 +56,7 @@ async def send_message(context: ContextTypes.DEFAULT_TYPE, chat_id: int, text: s
 
 def main():
     """
-    Main function to start the bot. Sets up the command and message handlers and starts polling.
+    Starts the Bot
     """
     application = ApplicationBuilder().token("7964637326:AAHveuiwmcGx8ZkQbBB5DoQx6D2Rq1VugWU").build()
 
