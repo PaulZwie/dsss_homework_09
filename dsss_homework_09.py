@@ -11,8 +11,10 @@ pipeline = transformers.pipeline(
     "text-generation",
     model=model_id,
     model_kwargs={"torch_dtype": torch.bfloat16},
-    device = device,
+    device=device,
 )
+
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """
     start command, to start the Bot
@@ -38,9 +40,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         {"role": "user", "content": input_message}
     ]
     output = pipeline(messages, max_new_tokens=256)
-    #print(output[0]["generated_text"])
+    # print(output[0]["generated_text"])
     output = output[0]["generated_text"][1]['content']
     await update.message.reply_text(output)
+
 
 async def send_message(context: ContextTypes.DEFAULT_TYPE, chat_id: int, text: str) -> None:
     """
